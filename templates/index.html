@@ -1,0 +1,145 @@
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Мой Казахстан 2050</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,sans-serif;background:#f1f8fc;color:#102b45}
+header{padding:20px 7%;background:#071d36;color:white;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:15px}
+header a{color:white;text-decoration:none;margin-right:15px}
+.brand{font-weight:bold;letter-spacing:2px}
+.hero{padding:70px 8%;background:linear-gradient(125deg,#071d36,#087eb4);color:white;min-height:390px;position:relative;overflow:hidden}
+.hero h1{font-size:clamp(42px,8vw,78px);margin:15px 0}
+.hero h1 span{color:#43d9ef}
+.hero p{font-size:18px;line-height:1.7;max-width:550px}
+.btn{display:inline-block;background:#43d9ef;color:#062744;padding:14px 20px;border:0;border-radius:5px;font-weight:bold;text-decoration:none;cursor:pointer}
+section{padding:55px 8%}
+h2{font-size:clamp(28px,5vw,42px)}
+.intro{color:#64798b;line-height:1.7}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px}
+.card{background:white;border:1px solid #d9e8ef;border-radius:10px;padding:23px}
+.card h3{color:#087eaa}
+.map-section{background:#e4f3f9}
+#map{height:400px;border-radius:10px;border:2px solid white}
+select,textarea{width:100%;padding:13px;margin:8px 0 18px;border:1px solid #c8dce7;border-radius:5px;font:inherit;background:white}
+form{background:white;padding:25px;border-radius:10px;max-width:650px}
+label{font-weight:bold;font-size:14px}
+.stat{font-size:24px;color:#078eb6;font-weight:bold}
+footer{background:#071d36;color:white;text-align:center;padding:30px}
+</style>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+</head>
+<body>
+<header>
+<div class="brand">✳ QAZAQSTAN 2050</div>
+<nav>
+<a href="#future">Будущее</a>
+<a href="#map-section">Карта</a>
+<a href="#survey">Опрос</a>
+</nav>
+</header>
+
+<div class="hero">
+<p>НАШЕ ОБЩЕЕ БУДУЩЕЕ</p>
+<h1>Мой Казахстан<br><span>2050</span></h1>
+<p>Современные города. Чистая природа. Сильная экономика. Возможности для каждого.</p>
+<a class="btn" href="#map-section">Исследовать Казахстан ↓</a>
+</div>
+
+<section id="future">
+<p>НАПРАВЛЕНИЯ РАЗВИТИЯ</p>
+<h2>Будущее создаём вместе</h2>
+<p class="intro">Каким станет Казахстан к 2050 году? Всё начинается с наших идей.</p>
+<div class="cards">
+<div class="card"><h3>🌱 Экология</h3><p>Чистая энергия, сохранение природы и забота об окружающей среде.</p></div>
+<div class="card"><h3>🤖 Технологии</h3><p>Искусственный интеллект, цифровые сервисы и умные города.</p></div>
+<div class="card"><h3>🎓 Образование</h3><p>Современные школы и доступные знания для каждого.</p></div>
+<div class="card"><h3>📈 Экономика</h3><p>Новые профессии, инновации и возможности для бизнеса.</p></div>
+</div>
+</section>
+
+<section class="map-section" id="map-section">
+<p>QR-ПУТЕВОДИТЕЛЬ</p>
+<h2>Открой Казахстан</h2>
+<p class="intro">Нажми на маркер карты, чтобы узнать больше о городах и природных достопримечательностях страны.</p>
+<div id="map"></div>
+<div class="card" style="margin-top:18px">
+<h3 id="place-name">Казахстан</h3>
+<p id="place-info">Исследуй удивительные места нашей страны на интерактивной карте.</p>
+</div>
+</section>
+
+<section id="survey">
+<p>ТВОЙ ГОЛОС ВАЖЕН</p>
+<h2>Каким ты видишь Казахстан 2050?</h2>
+<p class="intro">Выбери важное направление развития и поделись своей идеей.</p>
+<p>Количество ответов: <strong>{{ total }}</strong></p>
+<form action="{{ url_for('vote') }}" method="post">
+<label for="region">Твой регион</label>
+<select name="region" id="region" required>
+<option value="">Выбери регион</option>
+<option>Астана</option><option>Алматы</option><option>Шымкент</option>
+<option>Акмолинская область</option><option>Алматинская область</option>
+<option>Актюбинская область</option><option>Атырауская область</option>
+<option>Восточно-Казахстанская область</option><option>Жамбылская область</option>
+<option>Жетысу</option><option>Западно-Казахстанская область</option>
+<option>Карагандинская область</option><option>Костанайская область</option>
+<option>Кызылординская область</option><option>Мангистауская область</option>
+<option>Павлодарская область</option><option>Северо-Казахстанская область</option>
+<option>Туркестанская область</option><option>Улытау</option><option>Абай</option>
+</select>
+<label for="priority">Главный приоритет</label>
+<select name="priority" id="priority" required>
+<option value="">Выбери направление</option>
+<option>Экология и чистая энергия</option>
+<option>Технологии и искусственный интеллект</option>
+<option>Образование</option>
+<option>Экономика и новые профессии</option>
+<option>Комфортные города</option>
+</select>
+<label for="idea">Твоя идея (необязательно)</label>
+<textarea name="idea" id="idea" rows="4" maxlength="500" placeholder="Что ты хотел бы изменить?"></textarea>
+<button class="btn" type="submit">Отправить ответ →</button>
+</form>
+<h3>Результаты опроса</h3>
+<div class="cards">
+{% for item in priorities %}
+<div class="card"><strong>{{ item["priority"] }}</strong><p class="stat">{{ item["count"] }} голосов</p></div>
+{% else %}
+<p>Пока нет ответов. Стань первым участником!</p>
+{% endfor %}
+</div>
+</section>
+
+<footer>
+<strong>QAZAQSTAN 2050</strong>
+<p>Будущее начинается с нашей идеи.</p>
+</footer>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+const map=L.map('map').setView([48.2,67],4.5);
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{
+attribution:'&copy; OpenStreetMap'
+}).addTo(map);
+const places=[
+['Астана',51.1694,71.4491,'Столица Казахстана — город современной архитектуры и инноваций.'],
+['Алматы',43.2389,76.8897,'Культурный центр у подножия величественных гор.'],
+['Туркестан',43.2973,68.2518,'Исторический город и мавзолей Ходжи Ахмеда Ясави.'],
+['Бурабай',53.0833,70.3,'Живописные озёра, сосновые леса и горные скалы.'],
+['Чарынский каньон',43.35,79.0667,'Удивительные красные скалы и Долина замков.'],
+['Мангистау',43.65,51.1667,'Необычные плато и пейзажи на берегу Каспийского моря.']
+];
+places.forEach(p=>{
+const marker=L.marker([p[1],p[2]]).addTo(map).bindPopup('<b>'+p[0]+'</b><br>'+p[3]);
+marker.on('click',()=>{
+document.getElementById('place-name').textContent=p[0];
+document.getElementById('place-info').textContent=p[3];
+});
+});
+</script>
+</body>
+</html>
