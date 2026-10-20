@@ -1,0 +1,58 @@
+
+/* Мой Казахстан 2050 */
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f1f8fc;
+  color: #102b45;
+}
+
+a {
+  transition: opacity 0.2s ease;
+}
+
+a:hover {
+  opacity: 0.8;
+}
+
+button,
+select,
+textarea {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+#map {
+  width: 100%;
+  min-height: 350px;
+}
+
+@media (max-width: 600px) {
+  header {
+    padding: 16px 5%;
+  }
+
+  section {
+    padding: 35px 5%;
+  }
+
+  .hero {
+    padding: 45px 5%;
+  }
+}
